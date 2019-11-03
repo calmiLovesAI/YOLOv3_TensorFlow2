@@ -12,10 +12,10 @@ class NMS():
         center_x, center_y, width, height, scores = tf.split(self.prediction,
                                                              num_or_size_splits=[1, 1, 1, 1, 1],
                                                              axis=-1)
-        x1 = center_x - height / 2
-        y1 = center_y - width / 2
-        x2 = center_x + height / 2
-        y2 = center_y + width / 2
+        x1 = center_x - width / 2
+        y1 = center_y - height / 2
+        x2 = center_x + width / 2
+        y2 = center_y + height / 2
         boxes = tf.concat(values=[x1, y1, x2, y2], axis=-1)
         return boxes, scores
 
