@@ -11,3 +11,5 @@ A tensorflow2 implementation of YOLO_V3.
 5. https://blog.csdn.net/leviopku/article/details/82660381
 6. https://blog.csdn.net/qq_37541097/article/details/81214953
 7. https://blog.csdn.net/Gentleman_Qin/article/details/84349144
+8. https://blog.csdn.net/qq_34199326/article/details/84109828
+9. https://blog.csdn.net/weixin_38145317/article/details/95349201

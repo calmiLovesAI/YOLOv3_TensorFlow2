@@ -1,6 +1,6 @@
 import tensorflow as tf
 from configuration import ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM
-from bounding_box import bounding_box_predict
+from yolo.bounding_box import bounding_box_predict
 
 
 class DarkNetConv2D(tf.keras.layers.Layer):
@@ -123,12 +123,3 @@ class YOLOV3(tf.keras.Model):
 
         return prediction
 
-
-
-if __name__ == '__main__':
-    x = tf.random.normal(shape=(2, 412, 412, 3))
-    net = YOLOV3(out_channels=ANCHOR_NUM_EACH_SCALE * (CATEGORY_NUM + 5))
-    # net.build(input_shape=(None, 412, 412, 3))
-    # net.summary()
-    y = net(x, training=True)
-    print(y.shape)

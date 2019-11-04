@@ -35,7 +35,7 @@ def bounding_box_predict(feature_map, scale_type):
     center_index = tf.reshape(center_index, shape=(1, -1, 2))
 
     center_coord = center_index + tx_ty
-    anchors = tf.tile(get_coco_anchors(scale_type), [area, 1])
+    anchors = tf.tile(get_coco_anchors(scale_type) / downsampling_rate, [area, 1])
     bw_bh = tf.math.exp(tw_th) * anchors
 
     predictions = tf.concat(values=[center_coord * downsampling_rate,
