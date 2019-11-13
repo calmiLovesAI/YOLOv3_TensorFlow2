@@ -38,12 +38,10 @@ class GenerateLabel():
             # shape of wh : [N, 1, 2], N is the actual number of boxes per picture
             wh = np.expand_dims(wh, axis=1)
             # Calculate the iou between the box and the anchor, both center points are (0, 0).
-            iou_value = iou.IOU(anchors=anchors, boxes=wh).calculate_iou()
+            iou_value = iou.IOUSameXY(anchors=anchors, boxes=wh).calculate_iou()
             # shape of best_anchor : [N]
             best_anchor = np.argmax(iou_value, axis=-1)
             for i, n in enumerate(best_anchor):
-                # print("i = ", i)
-                # print("n = ", n)
                 for s in range(ANCHOR_NUM_EACH_SCALE):
                     if n in COCO_ANCHOR_INDEX[s]:
                         x = np.floor(self.true_boxes[b, i, 0] * SCALE_SIZE[s]).astype('int32')
