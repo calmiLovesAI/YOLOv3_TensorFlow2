@@ -1,10 +1,10 @@
 import tensorflow as tf
-from configuration import ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM, COCO_ANCHORS, COCO_ANCHOR_INDEX, IMAGE_HEIGHT
+from configuration import ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM, IMAGE_HEIGHT
+from yolo.anchor import get_coco_anchors
 
-
-def get_coco_anchors(scale_type):
-    index_list = COCO_ANCHOR_INDEX[scale_type]
-    return tf.convert_to_tensor(COCO_ANCHORS[index_list[0]: index_list[-1] + 1], dtype=tf.dtypes.float32)
+# def get_coco_anchors(scale_type):
+#     index_list = COCO_ANCHOR_INDEX[scale_type]
+#     return tf.convert_to_tensor(COCO_ANCHORS[index_list[0]: index_list[-1] + 1], dtype=tf.dtypes.float32)
 
 
 def generate_grid_index(grid_dim):
