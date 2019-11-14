@@ -2,10 +2,6 @@ import tensorflow as tf
 from configuration import ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM, IMAGE_HEIGHT
 from yolo.anchor import get_coco_anchors
 
-# def get_coco_anchors(scale_type):
-#     index_list = COCO_ANCHOR_INDEX[scale_type]
-#     return tf.convert_to_tensor(COCO_ANCHORS[index_list[0]: index_list[-1] + 1], dtype=tf.dtypes.float32)
-
 
 def generate_grid_index(grid_dim):
     x = tf.range(grid_dim, dtype=tf.dtypes.float32)
@@ -49,11 +45,6 @@ def bounding_box_predict(feature_map, scale_type, is_training=False):
     box_xy = tf.cast(box_xy, dtype=tf.dtypes.float32)
     box_wh = tf.cast(box_wh, dtype=tf.dtypes.float32)
 
-    # predictions = tf.concat(values=[box_xy,
-    #                                 box_wh,
-    #                                 confidence,
-    #                                 classes],
-    #                         axis=-1)
     if is_training:
         return box_xy, box_wh, center_index, feature_map
     else:

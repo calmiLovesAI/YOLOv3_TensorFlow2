@@ -58,9 +58,7 @@ class YoloLoss(tf.keras.losses.Loss):
                 box_1 = tf.expand_dims(pred_box[b], axis=-2)
                 box_2 = tf.expand_dims(true_box, axis=0)
                 iou = IOUDifferentXY(box_1=box_1, box_2=box_2).calculate_iou()
-                # 找出最大iou
                 best_iou = tf.keras.backend.max(iou, axis=-1)
-                # 当iou小于阈值时记录，即认为这个预测框不包含物体
                 ignore_mask = ignore_mask.write(b, tf.cast(best_iou < 0.5, dtype=tf.dtypes.float32))
                 return b + 1, ignore_mask
 
