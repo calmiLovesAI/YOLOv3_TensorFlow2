@@ -44,6 +44,11 @@ def bounding_box_predict(feature_map, scale_type, is_training=False):
     box_wh = tf.reshape(box_wh, shape=(-1, h, w, 3, 2))
     feature_map = tf.reshape(feature_map, shape=(-1, h, w, 3, CATEGORY_NUM + 5))
 
+    # cast dtype
+    center_index = tf.cast(center_index, dtype=tf.dtypes.float32)
+    box_xy = tf.cast(box_xy, dtype=tf.dtypes.float32)
+    box_wh = tf.cast(box_wh, dtype=tf.dtypes.float32)
+
     # predictions = tf.concat(values=[box_xy,
     #                                 box_wh,
     #                                 confidence,
