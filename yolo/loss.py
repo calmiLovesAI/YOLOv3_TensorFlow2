@@ -1,5 +1,5 @@
 import tensorflow as tf
-from configuration import SCALE_SIZE, IMAGE_HEIGHT, IMAGE_WIDTH
+from configuration import SCALE_SIZE, IMAGE_HEIGHT, IMAGE_WIDTH, IGNORE_THRESHOLD
 from utils.iou import IOUDifferentXY
 from yolo.bounding_box import bounding_box_predict
 from yolo.anchor import get_coco_anchors
@@ -59,7 +59,7 @@ class YoloLoss(tf.keras.losses.Loss):
                 box_2 = tf.expand_dims(true_box, axis=0)
                 iou = IOUDifferentXY(box_1=box_1, box_2=box_2).calculate_iou()
                 best_iou = tf.keras.backend.max(iou, axis=-1)
-                ignore_mask = ignore_mask.write(b, tf.cast(best_iou < 0.5, dtype=tf.dtypes.float32))
+                ignore_mask = ignore_mask.write(b, tf.cast(best_iou < IGNORE_THRESHOLD, dtype=tf.dtypes.float32))
                 return b + 1, ignore_mask
 
             _, ignore_mask = tf.while_loop(lambda b, *args: b < B_int, loop_body, [0, ignore_mask])

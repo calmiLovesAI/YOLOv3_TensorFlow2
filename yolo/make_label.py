@@ -13,7 +13,7 @@ class GenerateLabel():
         self.batch_size = self.true_boxes.shape[0]
 
     def generate_label(self):
-        center_xy = (self.true_boxes[..., 0:2] + self.true_boxes[..., 1:3]) // 2  # shape : [B, N, 2]
+        center_xy = (self.true_boxes[..., 0:2] + self.true_boxes[..., 2:4]) // 2  # shape : [B, N, 2]
         box_wh = self.true_boxes[..., 2:4] - self.true_boxes[..., 0:2]     # shape : [B, N, 2]
         self.true_boxes[..., 0:2] = center_xy / self.input_shape   # Normalization
         self.true_boxes[..., 2:4] = box_wh / self.input_shape   # Normalization
