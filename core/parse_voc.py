@@ -1,5 +1,5 @@
 import xml.dom.minidom as xdom
-from configuration import PASCAL_VOC_DIR, PASCAL_VOC_CLASSES, TXT_DIR
+from configuration import PASCAL_VOC_DIR, PASCAL_VOC_CLASSES, TXT_DIR, IMAGE_WIDTH, IMAGE_HEIGHT
 import os
 
 
@@ -9,12 +9,47 @@ class ParsePascalVOC():
         self.all_xml_dir = PASCAL_VOC_DIR + "Annotations"
         self.all_image_dir = PASCAL_VOC_DIR + "JPEGImages"
 
+    def __str_to_int(self, x):
+        return int(float(x))
+
+    def __process_coord(self, h, w, x_min, y_min, x_max, y_max):
+        h = self.__str_to_int(h)
+        w = self.__str_to_int(w)
+        x_min = self.__str_to_int(x_min)
+        y_min = self.__str_to_int(y_min)
+        x_max = self.__str_to_int(x_max)
+        y_max = self.__str_to_int(y_max)
+
+        x_scale = IMAGE_WIDTH / w
+        y_scale = IMAGE_HEIGHT / h
+        x_min = int(x_min * x_scale)
+        x_max = int(x_max * x_scale)
+        y_min = int(y_min * y_scale)
+        y_max = int(y_max * y_scale)
+
+        # for boxes closed to border
+        if x_min == 0:
+            x_min += 1
+        if y_min == 0:
+            y_min += 1
+        if x_max == IMAGE_WIDTH:
+            x_max -= 1
+        if y_max == IMAGE_HEIGHT:
+            y_max -= 1
+        return x_min, y_min, x_max, y_max
+
     # parse one xml file
     def __parse_xml(self, xml):
         obj_and_box_list = []
         DOMTree = xdom.parse(os.path.join(self.all_xml_dir, xml))
         annotation = DOMTree.documentElement
         image_name = annotation.getElementsByTagName("filename")[0].childNodes[0].data
+        size = annotation.getElementsByTagName("size")
+        image_height = 0
+        image_width = 0
+        for s in size:
+            image_height = s.getElementsByTagName("height")[0].childNodes[0].data
+            image_width = s.getElementsByTagName("width")[0].childNodes[0].data
 
         obj = annotation.getElementsByTagName("object")
         for o in obj:
@@ -26,6 +61,7 @@ class ParsePascalVOC():
                 ymin = box.getElementsByTagName("ymin")[0].childNodes[0].data
                 xmax = box.getElementsByTagName("xmax")[0].childNodes[0].data
                 ymax = box.getElementsByTagName("ymax")[0].childNodes[0].data
+                xmin, ymin, xmax, ymax = self.__process_coord(image_height, image_width, xmin, ymin, xmax, ymax)
                 o_list.append(xmin)
                 o_list.append(ymin)
                 o_list.append(xmax)

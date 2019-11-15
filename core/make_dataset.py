@@ -1,7 +1,6 @@
 import tensorflow as tf
 from core.read_txt import read_txt
-from configuration import PASCAL_VOC_DIR, IMAGE_WIDTH, IMAGE_HEIGHT, CHANNELS, BATCH_SIZE
-import os
+from configuration import IMAGE_WIDTH, IMAGE_HEIGHT, CHANNELS, BATCH_SIZE
 
 
 def preprocess_image(image_filename):
@@ -22,7 +21,6 @@ def get_length_of_dataset(dataset):
 
 def generate_dataset():
     image_names, boxes = read_txt()
-    # image_names_tensor = tf.convert_to_tensor(image_names, dtype=tf.dtypes.string)
     boxes_tensor = tf.convert_to_tensor(boxes, dtype=tf.dtypes.float32)
     image_data = tf.data.Dataset.from_tensor_slices(image_names).map(preprocess_image)
     box_data = tf.data.Dataset.from_tensor_slices(boxes_tensor)

@@ -50,6 +50,6 @@ class GenerateLabel():
                         class_id = self.true_boxes[b, i, 4].astype('int32')
                         true_label[s][b, y, x, anchor_id, 0:4] = self.true_boxes[b, i, 0:4]
                         true_label[s][b, y, x, anchor_id, 4] = 1
-                        true_label[s][b, y, x, anchor_id, 5 + class_id] = 1
+                        true_label[s][b, y, x, anchor_id, 5 + class_id - 1] = 1
 
         return true_label

@@ -13,7 +13,7 @@ def print_model_summary(network):
 
 def generate_label_batch(true_boxes):
     true_label = GenerateLabel(true_boxes=true_boxes.numpy(), input_shape=[IMAGE_HEIGHT, IMAGE_WIDTH]).generate_label()
-    return tf.convert_to_tensor(true_label, dtype=tf.dtypes.float32)
+    return true_label
 
 
 if __name__ == '__main__':
@@ -56,5 +56,7 @@ if __name__ == '__main__':
                                                                    step,
                                                                    tf.math.ceil(train_count / BATCH_SIZE),
                                                                    loss_metric.result()))
+
+        loss_metric.reset_states()
 
     tf.saved_model.save(obj=net, export_dir=save_model_dir)
