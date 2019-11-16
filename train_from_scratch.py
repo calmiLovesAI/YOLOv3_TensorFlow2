@@ -2,7 +2,7 @@ import tensorflow as tf
 from yolo.yolo_v3 import YOLOV3
 from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, save_model_dir
 from yolo.loss import YoloLoss
-from core.make_dataset import generate_dataset
+from data_process.make_dataset import generate_dataset
 from yolo.make_label import GenerateLabel
 
 

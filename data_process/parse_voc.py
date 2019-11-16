@@ -1,5 +1,5 @@
 import xml.dom.minidom as xdom
-from configuration import PASCAL_VOC_DIR, PASCAL_VOC_CLASSES, TXT_DIR, IMAGE_WIDTH, IMAGE_HEIGHT
+from configuration import PASCAL_VOC_DIR, PASCAL_VOC_CLASSES, IMAGE_WIDTH, IMAGE_HEIGHT
 import os
 
 
@@ -91,7 +91,3 @@ class ParsePascalVOC():
             line_info += "\n"
             with open(txt_dir, mode="a+") as f:
                 f.write(line_info)
-
-
-if __name__ == '__main__':
-    ParsePascalVOC().write_data_to_txt(txt_dir=TXT_DIR)

@@ -1,5 +1,5 @@
 import tensorflow as tf
-from core.read_txt import read_txt
+from data_process.read_txt import read_txt
 from configuration import IMAGE_WIDTH, IMAGE_HEIGHT, CHANNELS, BATCH_SIZE
 
 
