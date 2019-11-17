@@ -32,8 +32,8 @@ IGNORE_THRESHOLD = 0.5
 
 
 # NMS
-CONFIDENCE_THRESHOLD = 0.5
-IOU_THRESHOLD = 0.4
+CONFIDENCE_THRESHOLD = 0.6
+IOU_THRESHOLD = 0.5
 MAX_BOX_NUM = 50
 
 MAX_TRUE_BOX_NUM_PER_IMG = 20
@@ -41,3 +41,6 @@ MAX_TRUE_BOX_NUM_PER_IMG = 20
 
 # save model
 save_model_dir = "./saved_model/"
+
+test_picture_dir = "./test_data/1.jpg"
+test_video_dir = ""

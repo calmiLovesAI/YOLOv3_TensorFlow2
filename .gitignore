@@ -6,3 +6,6 @@ __pycache__
 /data_process/data.txt
 /saved_model/*
 !/saved_model/README.md
+/test_data/*
+!/test_data/README.md
+test_on_single_image.py
