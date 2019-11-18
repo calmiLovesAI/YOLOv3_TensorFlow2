@@ -8,8 +8,8 @@ class Inference():
     def __init__(self, yolo_output, input_image_shape):
         super(Inference, self).__init__()
         self.yolo_output = yolo_output
-        self.input_image_h = input_image_shape.shape[0]
-        self.input_image_w = input_image_shape.shape[1]
+        self.input_image_h = input_image_shape[0]
+        self.input_image_w = input_image_shape[1]
 
     def __yolo_post_processing(self, feature, scale_type):
         box_xy, box_wh, confidence, class_prob = bounding_box_predict(feature_map=feature,

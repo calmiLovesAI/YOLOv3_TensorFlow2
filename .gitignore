@@ -8,4 +8,3 @@ __pycache__
 !/saved_model/README.md
 /test_data/*
 !/test_data/README.md
-test_on_single_image.py
