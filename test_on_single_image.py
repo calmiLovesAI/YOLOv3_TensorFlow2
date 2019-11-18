@@ -1,7 +1,7 @@
 import tensorflow as tf
 import cv2
 from configuration import test_picture_dir, save_model_dir, CHANNELS, \
-    CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, PASCAL_VOC_CLASSES
+    IMAGE_HEIGHT, IMAGE_WIDTH, PASCAL_VOC_CLASSES
 from yolo.inference import Inference
 
 
@@ -24,7 +24,6 @@ def draw_boxes_on_image(image, boxes, scores, classes):
     return image
 
 
-
 def single_image_inference(image_dir, model):
     image = tf.io.decode_jpeg(contents=tf.io.read_file(image_dir), channels=CHANNELS)
     h = image.shape[0]
@@ -36,15 +35,8 @@ def single_image_inference(image_dir, model):
     img_tensor = tf.expand_dims(img_tensor, axis=0)
     yolo_output = model(img_tensor, training=False)
     boxes, scores, classes = Inference(yolo_output=yolo_output, input_image_shape=input_image_shape).get_final_boxes()
-    # boxes = tf.constant([[200, 200, 500, 600],
-    #                      [600, 600, 900, 1000]], dtype=tf.dtypes.float32)
-    # scores = tf.constant([[0.65],
-    #                       [0.85]], dtype=tf.dtypes.float32)
-    # classes = tf.constant([[1],
-    #                        [1]], dtype=tf.dtypes.float32)
     image_with_boxes = draw_boxes_on_image(cv2.imread(image_dir), boxes, scores, classes)
     return image_with_boxes
-
 
 
 if __name__ == '__main__':
@@ -53,8 +45,6 @@ if __name__ == '__main__':
     if gpus:
         for gpu in gpus:
             tf.config.experimental.set_memory_growth(gpu, True)
-
-    # test_image = preprocess_image(image_filename=test_picture_dir)
 
     # load model
     yolo_v3 = tf.saved_model.load(export_dir=save_model_dir)
