@@ -40,7 +40,7 @@ MAX_TRUE_BOX_NUM_PER_IMG = 20
 
 
 # save model
-save_model_dir = "./saved_model/"
+save_model_dir = "saved_model/"
 save_frequency = 5
 
 test_picture_dir = "./test_data/1.jpg"
