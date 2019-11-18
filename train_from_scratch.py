@@ -1,6 +1,6 @@
 import tensorflow as tf
 from yolo.yolo_v3 import YOLOV3
-from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, save_model_dir
+from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, save_model_dir, save_frequency
 from yolo.loss import YoloLoss
 from data_process.make_dataset import generate_dataset
 from yolo.make_label import GenerateLabel
@@ -59,4 +59,7 @@ if __name__ == '__main__':
 
         loss_metric.reset_states()
 
-    tf.saved_model.save(obj=net, export_dir=save_model_dir)
+        if (step + 1) % save_frequency == 0:
+            net.save_weights(filepath=save_model_dir+"epoch-{}".format(epoch + 1), save_format='tf')
+
+    net.save_weights(filepath=save_model_dir+"saved_model", save_format='tf')

@@ -1,8 +1,9 @@
 import tensorflow as tf
 import cv2
 from configuration import test_picture_dir, save_model_dir, CHANNELS, \
-    IMAGE_HEIGHT, IMAGE_WIDTH, PASCAL_VOC_CLASSES
+    IMAGE_HEIGHT, IMAGE_WIDTH, PASCAL_VOC_CLASSES, CATEGORY_NUM
 from yolo.inference import Inference
+from yolo.yolo_v3 import YOLOV3
 
 
 def find_class_name(class_id):
@@ -47,7 +48,8 @@ if __name__ == '__main__':
             tf.config.experimental.set_memory_growth(gpu, True)
 
     # load model
-    yolo_v3 = tf.saved_model.load(export_dir=save_model_dir)
+    yolo_v3 = YOLOV3(out_channels=3 * (CATEGORY_NUM + 5))
+    yolo_v3.load_weights(filepath=save_model_dir+"saved_model")
     # inference
     image = single_image_inference(image_dir=test_picture_dir, model=yolo_v3)
 
