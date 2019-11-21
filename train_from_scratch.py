@@ -1,7 +1,7 @@
 import tensorflow as tf
 from yolo.yolo_v3 import YOLOV3
 from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, \
-    save_model_dir, save_frequency, test_picture_dir, save_test_results_dir, save_test_results_or_not
+    save_model_dir, save_frequency, test_picture_dir, save_test_results_dir, save_test_results_or_not, load_weights_before_training
 from yolo.loss import YoloLoss
 from data_process.make_dataset import generate_dataset
 from yolo.make_label import GenerateLabel
@@ -32,6 +32,10 @@ if __name__ == '__main__':
 
     net = YOLOV3(out_channels=3 * (CATEGORY_NUM + 5))
     print_model_summary(network=net)
+    
+    if load_weights_before_training:
+        net.load_weights(filepath=save_model_dir+"saved_model")   # Change the weights filepath as appropriate.
+        print("Successfully load weights!")
 
     # loss and optimizer
     yolo_loss = YoloLoss()

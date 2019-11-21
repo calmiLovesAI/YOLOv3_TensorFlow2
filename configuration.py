@@ -1,6 +1,7 @@
 # training
 EPOCHS = 50
 BATCH_SIZE = 8
+load_weights_before_training = True
 
 # input image
 IMAGE_HEIGHT = 416
