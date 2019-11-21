@@ -42,7 +42,14 @@ if __name__ == '__main__':
 
     # loss and optimizer
     yolo_loss = YoloLoss()
-    optimizer = tf.optimizers.RMSprop()
+    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
+        initial_learning_rate=0.001,
+        decay_steps=3000,
+        decay_rate=0.96,
+        staircase=True
+    )
+    optimizer = tf.optimizers.RMSprop(learning_rate=lr_schedule)
+
 
     # metrics
     loss_metric = tf.metrics.Mean()
@@ -62,7 +69,7 @@ if __name__ == '__main__':
             step += 1
             labels = generate_label_batch(true_boxes=boxes)
             train_step(image_batch=images, label_batch=labels)
-            print("Epoch: {}/{}, step: {}/{}, loss: {:.5f}".format(epoch + 1,
+            print("Epoch: {}/{}, step: {}/{}, loss: {:.5f}".format(epoch,
                                                                    EPOCHS,
                                                                    step,
                                                                    tf.math.ceil(train_count / BATCH_SIZE),
