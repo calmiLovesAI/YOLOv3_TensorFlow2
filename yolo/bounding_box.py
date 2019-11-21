@@ -31,14 +31,16 @@ def bounding_box_predict(feature_map, scale_type, is_training=False):
     anchors = tf.tile(get_coco_anchors(scale_type) / downsampling_rate, [area, 1])
     bw_bh = tf.math.exp(tw_th) * anchors
 
-    box_xy = center_coord * downsampling_rate
-    box_wh = bw_bh * downsampling_rate
+    # box_xy = center_coord * downsampling_rate
+    # box_wh = bw_bh * downsampling_rate
+    box_xy = center_coord / h
+    box_wh = bw_bh
 
     # reshape
-    center_index = tf.reshape(center_index, shape=(-1, h, w, 3, 2))
-    box_xy = tf.reshape(box_xy, shape=(-1, h, w, 3, 2))
-    box_wh = tf.reshape(box_wh, shape=(-1, h, w, 3, 2))
-    feature_map = tf.reshape(feature_map, shape=(-1, h, w, 3, CATEGORY_NUM + 5))
+    center_index = tf.reshape(center_index, shape=(-1, h, w, ANCHOR_NUM_EACH_SCALE, 2))
+    box_xy = tf.reshape(box_xy, shape=(-1, h, w, ANCHOR_NUM_EACH_SCALE, 2))
+    box_wh = tf.reshape(box_wh, shape=(-1, h, w, ANCHOR_NUM_EACH_SCALE, 2))
+    feature_map = tf.reshape(feature_map, shape=(-1, h, w, ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM + 5))
 
     # cast dtype
     center_index = tf.cast(center_index, dtype=tf.dtypes.float32)

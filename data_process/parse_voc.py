@@ -28,14 +28,14 @@ class ParsePascalVOC():
         y_max = int(y_max * y_scale)
 
         # for boxes closed to border
-        if x_min == 0:
-            x_min += 1
-        if y_min == 0:
-            y_min += 1
-        if x_max == IMAGE_WIDTH:
-            x_max -= 1
-        if y_max == IMAGE_HEIGHT:
-            y_max -= 1
+        # if x_min == 0:
+        #     x_min += 1
+        # if y_min == 0:
+        #     y_min += 1
+        # if x_max == IMAGE_WIDTH:
+        #     x_max -= 1
+        # if y_max == IMAGE_HEIGHT:
+        #     y_max -= 1
         return x_min, y_min, x_max, y_max
 
     # parse one xml file

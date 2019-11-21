@@ -1,5 +1,4 @@
 import tensorflow as tf
-from configuration import ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM, SCALE_SIZE
 
 
 class DarkNetConv2D(tf.keras.layers.Layer):
@@ -112,9 +111,6 @@ class YOLOV3(tf.keras.Model):
         branch_2 = self.upsampling_2(branch_2, training=training)
         x_3 = tf.keras.layers.concatenate([branch_2, x_3])
         stem_3, _ = self.tail_3(x_3, training=training)
-        stem_1 = tf.reshape(stem_1, shape=(-1, SCALE_SIZE[0], SCALE_SIZE[0], ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM + 5))
-        stem_2 = tf.reshape(stem_2, shape=(-1, SCALE_SIZE[1], SCALE_SIZE[1], ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM + 5))
-        stem_3 = tf.reshape(stem_3, shape=(-1, SCALE_SIZE[2], SCALE_SIZE[2], ANCHOR_NUM_EACH_SCALE, CATEGORY_NUM + 5))
 
         return [stem_1, stem_2, stem_3]
 

@@ -22,12 +22,12 @@ class Inference():
         return boxes, box_scores
 
     def __boxes_to_original_image(self, box_xy, box_wh):
-        x_scale = IMAGE_WIDTH / self.input_image_w
-        y_scale = IMAGE_HEIGHT / self.input_image_h
-        x = box_xy[..., 0] / x_scale
-        y = box_xy[..., 1] / y_scale
-        w = box_wh[..., 0] / x_scale
-        h = box_wh[..., 1] / y_scale
+        # x_scale = IMAGE_WIDTH / self.input_image_w
+        # y_scale = IMAGE_HEIGHT / self.input_image_h
+        x = tf.expand_dims(box_xy[..., 0], axis=-1) * self.input_image_w
+        y = tf.expand_dims(box_xy[..., 1], axis=-1) * self.input_image_h
+        w = tf.expand_dims(box_wh[..., 0], axis=-1) * self.input_image_w
+        h = tf.expand_dims(box_wh[..., 1], axis=-1) * self.input_image_h
         xmin = x - w / 2
         ymin = y - h / 2
         xmax = x + w / 2
