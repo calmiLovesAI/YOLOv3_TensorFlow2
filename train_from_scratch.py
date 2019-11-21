@@ -1,9 +1,13 @@
 import tensorflow as tf
 from yolo.yolo_v3 import YOLOV3
-from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, save_model_dir, save_frequency
+from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, \
+    save_model_dir, save_frequency, test_picture_dir, save_test_results_dir, save_test_results_or_not
 from yolo.loss import YoloLoss
 from data_process.make_dataset import generate_dataset
 from yolo.make_label import GenerateLabel
+from test_on_single_image import single_image_inference
+import cv2
+import os
 
 
 def print_model_summary(network):
@@ -58,6 +62,11 @@ if __name__ == '__main__':
                                                                    loss_metric.result()))
 
         loss_metric.reset_states()
+
+        # save test result on single test image
+        if save_test_results_or_not:
+            test_image = single_image_inference(image_dir=test_picture_dir, model=net)
+            cv2.imwrite(filename=os.path.join(save_test_results_dir, "epoch-{}-result.jpg".format(epoch)), img=test_image)
 
         if epoch % save_frequency == 0:
             net.save_weights(filepath=save_model_dir+"epoch-{}".format(epoch), save_format='tf')
