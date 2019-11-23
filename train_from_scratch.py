@@ -9,6 +9,7 @@ from yolo.make_label import GenerateLabel
 from test_on_single_image import single_image_inference
 import cv2
 import os
+from utils.preprocess import process_image_filenames
 
 
 def print_model_summary(network):
@@ -68,7 +69,7 @@ if __name__ == '__main__':
         for images, boxes in train_dataset:
             step += 1
             labels = generate_label_batch(true_boxes=boxes)
-            train_step(image_batch=images, label_batch=labels)
+            train_step(image_batch=process_image_filenames(images), label_batch=labels)
             print("Epoch: {}/{}, step: {}/{}, loss: {:.5f}".format(epoch,
                                                                    EPOCHS,
                                                                    step,
