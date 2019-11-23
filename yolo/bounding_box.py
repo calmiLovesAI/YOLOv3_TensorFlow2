@@ -17,7 +17,6 @@ def bounding_box_predict(feature_map, scale_type, is_training=False):
     w = feature_map.shape[2]
     if h != w:
         raise ValueError("The shape[1] and shape[2] of feature map must be the same value.")
-    downsampling_rate = IMAGE_HEIGHT // h
     area = h * w
     pred = tf.reshape(feature_map, shape=(-1, ANCHOR_NUM_EACH_SCALE * area, CATEGORY_NUM + 5))
     pred = tf.nn.sigmoid(pred)
@@ -28,7 +27,7 @@ def bounding_box_predict(feature_map, scale_type, is_training=False):
     # shape : (1, 507, 2), (1, 2028, 2), (1, 8112, 2)
 
     center_coord = center_index + tx_ty
-    anchors = tf.tile(get_coco_anchors(scale_type) / downsampling_rate, [area, 1])
+    anchors = tf.tile(get_coco_anchors(scale_type) / IMAGE_HEIGHT, [area, 1])
     bw_bh = tf.math.exp(tw_th) * anchors
 
     # box_xy = center_coord * downsampling_rate
