@@ -1,6 +1,7 @@
 import xml.dom.minidom as xdom
-from configuration import PASCAL_VOC_DIR, PASCAL_VOC_CLASSES, IMAGE_WIDTH, IMAGE_HEIGHT
+from configuration import PASCAL_VOC_DIR, PASCAL_VOC_CLASSES
 import os
+from utils.resize_image import ResizeWithPad
 
 
 class ParsePascalVOC():
@@ -20,23 +21,9 @@ class ParsePascalVOC():
         x_max = self.__str_to_int(x_max)
         y_max = self.__str_to_int(y_max)
 
-        x_scale = IMAGE_WIDTH / w
-        y_scale = IMAGE_HEIGHT / h
-        x_min = int(x_min * x_scale)
-        x_max = int(x_max * x_scale)
-        y_min = int(y_min * y_scale)
-        y_max = int(y_max * y_scale)
+        x_min, x_max, y_min, y_max = ResizeWithPad(h=h, w=w).raw_to_resized(x_min=x_min, y_min=y_min, x_max=x_max, y_max=y_max)
 
-        # for boxes closed to border
-        # if x_min == 0:
-        #     x_min += 1
-        # if y_min == 0:
-        #     y_min += 1
-        # if x_max == IMAGE_WIDTH:
-        #     x_max -= 1
-        # if y_max == IMAGE_HEIGHT:
-        #     y_max -= 1
-        return x_min, y_min, x_max, y_max
+        return int(x_min), int(y_min), int(x_max), int(y_max)
 
     # parse one xml file
     def __parse_xml(self, xml):

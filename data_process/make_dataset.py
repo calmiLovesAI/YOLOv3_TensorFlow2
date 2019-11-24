@@ -3,7 +3,6 @@ from data_process.read_txt import read_txt
 from configuration import BATCH_SIZE
 
 
-
 def get_length_of_dataset(dataset):
     count = 0
     for _ in dataset:

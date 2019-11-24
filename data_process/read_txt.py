@@ -14,7 +14,7 @@ def read_txt():
     with open(TXT_DIR, mode="r") as f:
         for line_info in f.readlines():
             index += 1
-            if index > 1000:
+            if index > 2000:
                 break
             line_info = line_info.strip('\n')
             split_line = line_info.split(" ")

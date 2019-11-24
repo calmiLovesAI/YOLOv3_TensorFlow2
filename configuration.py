@@ -1,5 +1,5 @@
 # training
-EPOCHS = 50
+EPOCHS = 1000
 BATCH_SIZE = 8
 load_weights_before_training = False
 load_weights_from_epoch = 10
