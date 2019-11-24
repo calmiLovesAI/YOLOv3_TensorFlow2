@@ -43,7 +43,7 @@ MAX_TRUE_BOX_NUM_PER_IMG = 20
 
 # save model
 save_model_dir = "saved_model/"
-save_test_results_or_not = True
+save_test_results_or_not = False
 save_test_results_dir = "./test_result_during_training"
 save_frequency = 5
 

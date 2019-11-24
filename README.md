@@ -1,6 +1,31 @@
 # YOLOv3_TensorFlow2
 A tensorflow2 implementation of YOLO_V3.
 
+## Requirements:
++ Python == 3.7
++ TensorFlow == 2.0.0
++ numpy == 1.17.0
+
+## Usage
+### Train on PASCAL VOC 2012
+1. Download the [PASCAL VOC 2012 dataset](http://host.robots.ox.ac.uk/pascal/VOC/).
+2. Unzip the file and place it in the 'dataset' folder, make sure the directory is like this : 
+```
+|——dataset
+    |——VOCdevkit
+        |——VOC2012
+            |——Annotations
+            |——ImageSets
+            |——JPEGImages
+            |——SegmentationClass
+            |——SegmentationObject
+```
+3. Change the parameters in **configuration.py** according to the specific situation. Specially, you can set *"load_weights_before_training"* to **True** if you would like to restore training from saved weights.
+4. Run **train_from_scratch.py** to start training.
+
+### Test
+1. Change *"test_picture_dir"* in **configuration.py**.
+2. Run **test_on_single_image.py** to test single picture.
 
 
 ## Reference
