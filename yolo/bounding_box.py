@@ -30,8 +30,6 @@ def bounding_box_predict(feature_map, scale_type, is_training=False):
     anchors = tf.tile(get_coco_anchors(scale_type) / IMAGE_HEIGHT, [area, 1])
     bw_bh = tf.math.exp(tw_th) * anchors
 
-    # box_xy = center_coord * downsampling_rate
-    # box_wh = bw_bh * downsampling_rate
     box_xy = center_coord / h
     box_wh = bw_bh
 

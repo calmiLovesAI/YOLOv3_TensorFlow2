@@ -36,6 +36,10 @@ class ResizeWithPad():
 
     def resized_to_raw(self, x_min, y_min, width, height):
         longer_edge, scale, padding_length = self.get_transform_coefficient()
+        x_min *= IMAGE_WIDTH
+        width *= IMAGE_WIDTH
+        y_min *= IMAGE_HEIGHT
+        height *= IMAGE_HEIGHT
         if longer_edge == "h":
             x_min -= padding_length
         else:
