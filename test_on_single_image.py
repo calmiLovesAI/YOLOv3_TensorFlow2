@@ -30,7 +30,7 @@ def single_image_inference(image_dir, model):
     h = image.shape[0]
     w = image.shape[1]
     input_image_shape = tf.constant([h, w], dtype=tf.dtypes.float32)
-    img_tensor = tf.image.resize(image, [IMAGE_HEIGHT, IMAGE_WIDTH])
+    img_tensor = tf.image.resize_with_pad(image=image, target_height=IMAGE_HEIGHT, target_width=IMAGE_WIDTH)
     img_tensor = tf.cast(img_tensor, tf.float32)
     img_tensor = img_tensor / 255.0
     img_tensor = tf.expand_dims(img_tensor, axis=0)
