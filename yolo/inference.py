@@ -27,7 +27,7 @@ class Inference():
         y = tf.expand_dims(box_xy[..., 1], axis=-1)
         w = tf.expand_dims(box_wh[..., 0], axis=-1)
         h = tf.expand_dims(box_wh[..., 1], axis=-1)
-        x, y, w, h = ResizeWithPad(h=self.input_image_h, w=self.input_image_w).resized_to_raw(x_min=x, y_min=y, width=w, height=h)
+        x, y, w, h = ResizeWithPad(h=self.input_image_h, w=self.input_image_w).resized_to_raw(center_x=x, center_y=y, width=w, height=h)
         xmin = x - w / 2
         ymin = y - h / 2
         xmax = x + w / 2
