@@ -1,8 +1,7 @@
 import tensorflow as tf
 from yolo.yolo_v3 import YOLOV3
 from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, \
-    save_model_dir, save_frequency, test_picture_dir, save_test_results_dir, save_test_results_or_not, \
-    load_weights_before_training, load_weights_from_epoch
+    save_model_dir, save_frequency, test_picture_dir, load_weights_before_training, load_weights_from_epoch
 from yolo.loss import YoloLoss
 from data_process.make_dataset import generate_dataset, parse_dataset_batch
 from yolo.make_label import GenerateLabel
@@ -79,10 +78,6 @@ if __name__ == '__main__':
 
         loss_metric.reset_states()
 
-        # save test result on single test image
-        if save_test_results_or_not:
-            test_image = single_image_inference(image_dir=test_picture_dir, model=net)
-            cv2.imwrite(filename=os.path.join(save_test_results_dir, "epoch-{}-result.jpg".format(epoch)), img=test_image)
 
         if epoch % save_frequency == 0:
             net.save_weights(filepath=save_model_dir+"epoch-{}".format(epoch), save_format='tf')
