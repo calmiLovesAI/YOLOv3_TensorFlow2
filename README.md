@@ -31,7 +31,8 @@ xxx.jpg 100 200 300 400 1 300 600 500 800 2
 The first position is the image name, and the next 5 elements are [xmin, ymin, xmax, ymax, class_id]. If there are multiple boxes, continue to add elements later. <br>**Considering that the image will be resized before it is entered into the network, the values of xmin, ymin, xmax, and ymax will also change accordingly.**<br>
 The original picture and resized picture:<br>
 Create a new file *data.txt* in the data_process directory and write the label of each picture into it,each line is a label for an image.
-
+![original picture](https://github.com/calmisential/YOLOv3_TensorFlow2/blob/master/assets/1.png)
+![resized picture](https://github.com/calmisential/YOLOv3_TensorFlow2/blob/master/assets/2.png)
 2. Change the parameters *CATEGORY_NUM*, *use_dataset*, *custom_dataset_dir*, *custom_dataset_classes* in **configuration.py**.
 3. Run **train_from_scratch.py** to start training.
 
