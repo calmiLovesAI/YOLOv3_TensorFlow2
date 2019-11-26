@@ -1,6 +1,5 @@
 .idea
 __pycache__
-/test/
 /dataset/*
 !/dataset/README.md
 /data_process/data.txt
