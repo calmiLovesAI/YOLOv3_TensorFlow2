@@ -1,5 +1,6 @@
 import tensorflow as tf
-from configuration import IMAGE_WIDTH, IMAGE_HEIGHT, CHANNELS, PASCAL_VOC_DIR
+from configuration import IMAGE_WIDTH, IMAGE_HEIGHT, CHANNELS
+from parse_cfg import ParseCfg
 import os
 
 
@@ -21,7 +22,7 @@ def process_single_image(image_filename):
 def process_image_filenames(filenames):
     image_list = []
     for filename in filenames:
-        image_path = os.path.join(PASCAL_VOC_DIR + "JPEGImages", filename)
+        image_path = os.path.join(ParseCfg().get_images_dir(), filename)
         image_tensor = process_single_image(image_path)
         image_list.append(image_tensor)
     return tf.concat(values=image_list, axis=0)

@@ -1,5 +1,5 @@
 import xml.dom.minidom as xdom
-from configuration import PASCAL_VOC_DIR, PASCAL_VOC_CLASSES
+from configuration import PASCAL_VOC_CLASSES, PASCAL_VOC_DIR
 import os
 from utils.resize_image import ResizeWithPad
 

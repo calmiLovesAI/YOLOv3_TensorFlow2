@@ -1,13 +1,14 @@
 import tensorflow as tf
 import cv2
-from configuration import test_picture_dir, save_model_dir, CHANNELS, PASCAL_VOC_CLASSES, CATEGORY_NUM
+from configuration import test_picture_dir, save_model_dir, CHANNELS, CATEGORY_NUM
+from parse_cfg import ParseCfg
 from yolo.inference import Inference
 from yolo.yolo_v3 import YOLOV3
 from utils.preprocess import resize_image_with_pad
 
 
 def find_class_name(class_id):
-    for k, v in PASCAL_VOC_CLASSES.items():
+    for k, v in ParseCfg().get_classes().items():
         if v == class_id:
             return k
 
