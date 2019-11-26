@@ -4,7 +4,7 @@ from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPO
     save_model_dir, save_frequency, test_picture_dir, save_test_results_dir, save_test_results_or_not, \
     load_weights_before_training, load_weights_from_epoch
 from yolo.loss import YoloLoss
-from data_process.make_dataset import generate_dataset
+from data_process.make_dataset import generate_dataset, parse_dataset_batch
 from yolo.make_label import GenerateLabel
 from test_on_single_image import single_image_inference
 import cv2
@@ -18,7 +18,7 @@ def print_model_summary(network):
 
 
 def generate_label_batch(true_boxes):
-    true_label = GenerateLabel(true_boxes=true_boxes.numpy(), input_shape=[IMAGE_HEIGHT, IMAGE_WIDTH]).generate_label()
+    true_label = GenerateLabel(true_boxes=true_boxes, input_shape=[IMAGE_HEIGHT, IMAGE_WIDTH]).generate_label()
     return true_label
 
 
@@ -66,8 +66,9 @@ if __name__ == '__main__':
 
     for epoch in range(load_weights_from_epoch + 1, EPOCHS):
         step = 0
-        for images, boxes in train_dataset:
+        for dataset_batch in train_dataset:
             step += 1
+            images, boxes = parse_dataset_batch(dataset=dataset_batch)
             labels = generate_label_batch(true_boxes=boxes)
             train_step(image_batch=process_image_filenames(images), label_batch=labels)
             print("Epoch: {}/{}, step: {}/{}, loss: {:.5f}".format(epoch,
