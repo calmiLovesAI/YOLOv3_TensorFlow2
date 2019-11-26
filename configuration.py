@@ -16,7 +16,7 @@ COCO_ANCHORS = [[116, 90], [156, 198], [373, 326], [30, 61], [62, 45], [59, 119]
 COCO_ANCHOR_INDEX = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
 SCALE_SIZE = [13, 26, 52]
 
-using_dataset = "pascal_voc"      # "custom", "pascal_voc"
+use_dataset = "pascal_voc"      # "custom", "pascal_voc"
 
 PASCAL_VOC_DIR = "./dataset/VOCdevkit/VOC2012/"
 # The 20 object classes of PASCAL VOC
