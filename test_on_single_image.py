@@ -1,9 +1,9 @@
 import tensorflow as tf
 import cv2
-from configuration import test_picture_dir, save_model_dir, CHANNELS, \
-    IMAGE_HEIGHT, IMAGE_WIDTH, PASCAL_VOC_CLASSES, CATEGORY_NUM
+from configuration import test_picture_dir, save_model_dir, CHANNELS, PASCAL_VOC_CLASSES, CATEGORY_NUM
 from yolo.inference import Inference
 from yolo.yolo_v3 import YOLOV3
+from utils.preprocess import resize_image_with_pad
 
 
 def find_class_name(class_id):
@@ -30,10 +30,7 @@ def single_image_inference(image_dir, model):
     h = image.shape[0]
     w = image.shape[1]
     input_image_shape = tf.constant([h, w], dtype=tf.dtypes.float32)
-    img_tensor = tf.image.resize_with_pad(image=image, target_height=IMAGE_HEIGHT, target_width=IMAGE_WIDTH)
-    img_tensor = tf.cast(img_tensor, tf.float32)
-    img_tensor = img_tensor / 255.0
-    img_tensor = tf.expand_dims(img_tensor, axis=0)
+    img_tensor = resize_image_with_pad(image)
     yolo_output = model(img_tensor, training=False)
     boxes, scores, classes = Inference(yolo_output=yolo_output, input_image_shape=input_image_shape).get_final_boxes()
     image_with_boxes = draw_boxes_on_image(cv2.imread(image_dir), boxes, scores, classes)

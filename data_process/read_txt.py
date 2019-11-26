@@ -12,7 +12,7 @@ class ReadTxt():
         split_line = line_info.split(" ")
         box_num = (len(split_line) - 1) / 5
         image_name = split_line[0]
-        print("Reading {}".format(image_name))
+        # print("Reading {}".format(image_name))
         split_line = split_line[1:]
         boxes = []
         for i in range(MAX_TRUE_BOX_NUM_PER_IMG):
