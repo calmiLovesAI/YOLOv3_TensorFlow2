@@ -5,6 +5,7 @@ A tensorflow2 implementation of YOLO_V3.
 + Python == 3.7
 + TensorFlow == 2.0.0
 + numpy == 1.17.0
++ opencv-python == 4.1.0
 
 ## Usage
 ### Train on PASCAL VOC 2012
@@ -25,9 +26,7 @@ A tensorflow2 implementation of YOLO_V3.
 
 ### Train on custom dataset
 1. Turn your custom dataset's labels into this form: 
-```
-xxx.jpg 100 200 300 400 1 300 600 500 800 2
-```
+```xxx.jpg 100 200 300 400 1 300 600 500 800 2```.
 The first position is the image name, and the next 5 elements are [xmin, ymin, xmax, ymax, class_id]. If there are multiple boxes, continue to add elements later. <br>**Considering that the image will be resized before it is entered into the network, the values of xmin, ymin, xmax, and ymax will also change accordingly.**<br>
 The sample of **original picture** and **resized picture**:<br>
 ![original picture](https://github.com/calmisential/YOLOv3_TensorFlow2/raw/master/assets/1.png)
