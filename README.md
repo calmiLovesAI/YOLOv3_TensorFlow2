@@ -22,7 +22,7 @@ A tensorflow2 implementation of YOLO_V3.
             |——SegmentationObject
 ```
 3. Change the parameters in **configuration.py** according to the specific situation. Specially, you can set *"load_weights_before_training"* to **True** if you would like to restore training from saved weights.
-4. Run **train_from_scratch.py** to start training.
+4. Run **write_to_txt.py** to generate *data.txt*, and then run **train_from_scratch.py** to start training.
 
 ### Train on custom dataset
 1. Turn your custom dataset's labels into this form: 
@@ -33,7 +33,7 @@ The example of **original picture** and **resized picture**:<br>
 ![resized picture](https://raw.githubusercontent.com/calmisential/YOLOv3_TensorFlow2/master/assets/2.png)<br>
 Create a new file *data.txt* in the data_process directory and write the label of each picture into it, each line is a label for an image.
 2. Change the parameters *CATEGORY_NUM*, *use_dataset*, *custom_dataset_dir*, *custom_dataset_classes* in **configuration.py**.
-3. Run **train_from_scratch.py** to start training.
+3. Run **write_to_txt.py** to generate *data.txt*, and then run **train_from_scratch.py** to start training.
 
 ### Test
 1. Change *"test_picture_dir"* in **configuration.py**.
