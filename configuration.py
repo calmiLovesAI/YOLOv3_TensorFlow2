@@ -31,7 +31,6 @@ custom_dataset_dir = ""
 custom_dataset_classes = {}
 
 
-train_ratio = 0.8
 
 # loss
 IGNORE_THRESHOLD = 0.5
