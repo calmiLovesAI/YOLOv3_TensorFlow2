@@ -19,6 +19,8 @@ SCALE_SIZE = [13, 26, 52]
 use_dataset = "pascal_voc"      # "custom", "pascal_voc"
 
 PASCAL_VOC_DIR = "./dataset/VOCdevkit/VOC2012/"
+PASCAL_VOC_ANNOTATION = PASCAL_VOC_DIR + "Annotations"
+PASCAL_VOC_IMAGE = PASCAL_VOC_DIR + "JPEGImages"
 # The 20 object classes of PASCAL VOC
 PASCAL_VOC_CLASSES = {"person": 1, "bird": 2, "cat": 3, "cow": 4, "dog": 5,
                       "horse": 6, "sheep": 7, "aeroplane": 8, "bicycle": 9,
@@ -49,4 +51,3 @@ save_model_dir = "saved_model/"
 save_frequency = 5
 
 test_picture_dir = "./test_data/1.jpg"
-test_video_dir = ""

@@ -1,13 +1,10 @@
 import tensorflow as tf
 from yolo.yolo_v3 import YOLOV3
 from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, \
-    save_model_dir, save_frequency, test_picture_dir, load_weights_before_training, load_weights_from_epoch
+    save_model_dir, save_frequency, load_weights_before_training, load_weights_from_epoch
 from yolo.loss import YoloLoss
 from data_process.make_dataset import generate_dataset, parse_dataset_batch
 from yolo.make_label import GenerateLabel
-from test_on_single_image import single_image_inference
-import cv2
-import os
 from utils.preprocess import process_image_filenames
 
 

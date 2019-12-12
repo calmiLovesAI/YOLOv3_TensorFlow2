@@ -1,5 +1,5 @@
 import xml.dom.minidom as xdom
-from configuration import PASCAL_VOC_CLASSES, PASCAL_VOC_DIR
+from configuration import PASCAL_VOC_CLASSES, PASCAL_VOC_ANNOTATION, PASCAL_VOC_IMAGE
 import os
 from utils.resize_image import ResizeWithPad
 
@@ -7,8 +7,8 @@ from utils.resize_image import ResizeWithPad
 class ParsePascalVOC():
     def __init__(self):
         super(ParsePascalVOC, self).__init__()
-        self.all_xml_dir = PASCAL_VOC_DIR + "Annotations"
-        self.all_image_dir = PASCAL_VOC_DIR + "JPEGImages"
+        self.all_xml_dir = PASCAL_VOC_ANNOTATION
+        self.all_image_dir = PASCAL_VOC_IMAGE
 
     def __str_to_int(self, x):
         return int(float(x))
