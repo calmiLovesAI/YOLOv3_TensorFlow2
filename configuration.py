@@ -51,3 +51,5 @@ save_model_dir = "saved_model/"
 save_frequency = 5
 
 test_picture_dir = "./test_data/1.jpg"
+test_video_dir = "./test_data/test_video.mp4"
+temp_frame_dir = "./test_data/temp.jpg"

@@ -75,7 +75,6 @@ if __name__ == '__main__':
 
         loss_metric.reset_states()
 
-
         if epoch % save_frequency == 0:
             net.save_weights(filepath=save_model_dir+"epoch-{}".format(epoch), save_format='tf')
 
