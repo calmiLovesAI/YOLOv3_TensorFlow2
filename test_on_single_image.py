@@ -32,6 +32,8 @@ def single_image_inference(image_dir, model):
     w = image.shape[1]
     input_image_shape = tf.constant([h, w], dtype=tf.dtypes.float32)
     img_tensor = resize_image_with_pad(image)
+    img_tensor = tf.dtypes.cast(img_tensor, dtype=tf.dtypes.float32)
+    img_tensor = img_tensor / 255.0
     yolo_output = model(img_tensor, training=False)
     boxes, scores, classes = Inference(yolo_output=yolo_output, input_image_shape=input_image_shape).get_final_boxes()
     image_with_boxes = draw_boxes_on_image(cv2.imread(image_dir), boxes, scores, classes)

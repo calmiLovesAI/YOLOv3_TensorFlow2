@@ -16,6 +16,8 @@ def process_single_image(image_filename):
     img_raw = tf.io.read_file(image_filename)
     image = tf.io.decode_jpeg(img_raw, channels=CHANNELS)
     image = resize_image_with_pad(image=image)
+    image = tf.dtypes.cast(image, dtype=tf.dtypes.float32)
+    image = image / 255.0
     return image
 
 
