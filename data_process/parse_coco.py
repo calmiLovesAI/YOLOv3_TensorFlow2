@@ -86,7 +86,6 @@ class ParseCOCO(object):
             raise ValueError("An error occurred while transforming the category id.")
         return COCO_CLASSES[original_name]
 
-
     def __bbox_str(self, bboxes):
         bbox_info = ""
         for bbox in bboxes:
@@ -94,7 +93,6 @@ class ParseCOCO(object):
                 bbox_info += str(item)
                 bbox_info += " "
         return bbox_info.strip()
-
 
     def write_data_to_txt(self, txt_dir):
         image_files, image_ids, image_heights, image_widths = self.__get_image_information(self.train_dict)
@@ -110,10 +108,11 @@ class ParseCOCO(object):
                                                            image_heights[i],
                                                            image_widths[i],
                                                            category_ids)
-                line_info += self.__bbox_str(bboxes=processed_bboxes)
-                line_info += "\n"
-                print("Writing information of picture {} to {}, which took {:.2f}s".format(image_files[i], txt_dir, time.time() - write_line_start_time))
-                f.write(line_info)
+                if processed_bboxes:
+                    line_info += self.__bbox_str(bboxes=processed_bboxes)
+                    line_info += "\n"
+                    print("Writing information of picture {} to {}, which took {:.2f}s".format(image_files[i], txt_dir, time.time() - write_line_start_time))
+                    f.write(line_info)
 
 
 
