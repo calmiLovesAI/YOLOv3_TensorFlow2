@@ -10,13 +10,13 @@ IMAGE_WIDTH = 416
 CHANNELS = 3
 
 # Dataset
-CATEGORY_NUM = 20
+CATEGORY_NUM = 80
 ANCHOR_NUM_EACH_SCALE = 3
 COCO_ANCHORS = [[116, 90], [156, 198], [373, 326], [30, 61], [62, 45], [59, 119], [10, 13], [16, 30], [33, 23]]
 COCO_ANCHOR_INDEX = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
 SCALE_SIZE = [13, 26, 52]
 
-use_dataset = "pascal_voc"      # "custom", "pascal_voc", "coco"
+use_dataset = "coco"      # "custom", "pascal_voc", "coco"
 
 PASCAL_VOC_DIR = "./dataset/VOCdevkit/VOC2012/"
 PASCAL_VOC_ANNOTATION = PASCAL_VOC_DIR + "Annotations"
@@ -31,20 +31,20 @@ PASCAL_VOC_CLASSES = {"person": 1, "bird": 2, "cat": 3, "cow": 4, "dog": 5,
 COCO_DIR = "./dataset/COCO/2017/"
 COCO_CLASSES = {"person": 1, "bicycle": 2, "car": 3, "motorcycle": 4, "airplane": 5,
                 "bus": 6, "train": 7, "truck": 8, "boat": 9, "traffic light": 10,
-                "fire hydrant": 11, "stop sign": 13, "parking meter": 14, "bench": 15,
-                "bird": 16, "cat": 17, "dog": 18, "horse": 19, "sheep": 20, "cow": 21,
-                "elephant": 22, "bear": 23, "zebra": 24, "giraffe": 25, "backpack": 27,
-                "umbrella": 28, "handbag": 31, "tie": 32, "suitcase": 33, "frisbee": 34,
-                "skis": 35, "snowboard": 36, "sports ball": 37, "kite": 38, "baseball bat": 39,
-                "baseball glove": 40, "skateboard": 41, "surfboard": 42, "tennis racket": 43,
-                "bottle": 44, "wine glass": 46, "cup": 47, "fork": 48, "knife": 49, "spoon": 50,
-                "bowl": 51, "banana": 52, "apple": 53, "sandwich": 54, "orange": 55, "broccoli": 56,
-                "carrot": 57, "hot dog": 58, "pizza": 59, "donut": 60, "cake": 61, "chair": 62,
-                "couch": 63, "potted plant": 64, "bed": 65, "dining table": 67, "toilet": 70,
-                "tv": 72, "laptop": 73, "mouse": 74, "remote": 75, "keyboard": 76, "cell phone": 77,
-                "microwave": 78, "oven": 79, "toaster": 80, "sink": 81, "refrigerator": 82,
-                "book": 84, "clock": 85, "vase": 86, "scissors": 87, "teddy bear": 88,
-                "hair drier": 89, "toothbrush": 90}
+                "fire hydrant": 11, "stop sign": 12, "parking meter": 13, "bench": 14,
+                "bird": 15, "cat": 16, "dog": 17, "horse": 18, "sheep": 19, "cow": 20,
+                "elephant": 21, "bear": 22, "zebra": 23, "giraffe": 24, "backpack": 25,
+                "umbrella": 26, "handbag": 27, "tie": 28, "suitcase": 29, "frisbee": 30,
+                "skis": 31, "snowboard": 32, "sports ball": 33, "kite": 34, "baseball bat": 35,
+                "baseball glove": 36, "skateboard": 37, "surfboard": 38, "tennis racket": 39,
+                "bottle": 40, "wine glass": 41, "cup": 42, "fork": 43, "knife": 44, "spoon": 45,
+                "bowl": 46, "banana": 47, "apple": 48, "sandwich": 49, "orange": 50, "broccoli": 51,
+                "carrot": 52, "hot dog": 53, "pizza": 54, "donut": 55, "cake": 56, "chair": 57,
+                "couch": 58, "potted plant": 59, "bed": 60, "dining table": 61, "toilet": 62,
+                "tv": 63, "laptop": 64, "mouse": 65, "remote": 66, "keyboard": 67, "cell phone": 68,
+                "microwave": 69, "oven": 70, "toaster": 71, "sink": 72, "refrigerator": 73,
+                "book": 74, "clock": 75, "vase": 76, "scissors": 77, "teddy bear": 78,
+                "hair drier": 79, "toothbrush": 80}
 
 
 

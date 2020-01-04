@@ -1,4 +1,4 @@
-from configuration import COCO_DIR
+from configuration import COCO_DIR, COCO_CLASSES
 import json
 from pathlib import Path
 import time
@@ -73,8 +73,19 @@ class ParseCOCO(object):
             xmax = int(x + w)
             ymax = int(y + h)
             x_min, y_min, x_max, y_max = self.__process_coord(h=image_height, w=image_width, x_min=x, y_min=y, x_max=xmax, y_max=ymax)
-            processed_bboxes.append([x_min, y_min, x_max, y_max, category_ids[index]])
+            processed_bboxes.append([x_min, y_min, x_max, y_max, self.__category_id_transform(category_ids[index])])
         return processed_bboxes
+
+    def __category_id_transform(self, original_id):
+        category_id_dict = self.__get_category_id_information(self.train_dict)
+        original_name = "none"
+        for category_name, category_id in category_id_dict.items():
+            if category_id == original_id:
+                original_name = category_name
+        if original_name == "none":
+            raise ValueError("An error occurred while transforming the category id.")
+        return COCO_CLASSES[original_name]
+
 
     def __bbox_str(self, bboxes):
         bbox_info = ""
