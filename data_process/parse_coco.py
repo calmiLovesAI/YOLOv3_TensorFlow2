@@ -1,4 +1,4 @@
-from configuration import COCO_DIR, COCO_CLASSES
+from configuration import COCO_DIR
 import json
 from pathlib import Path
 import time
