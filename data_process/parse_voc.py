@@ -4,7 +4,7 @@ import os
 from utils.resize_image import ResizeWithPad
 
 
-class ParsePascalVOC():
+class ParsePascalVOC(object):
     def __init__(self):
         super(ParsePascalVOC, self).__init__()
         self.all_xml_dir = PASCAL_VOC_ANNOTATION
