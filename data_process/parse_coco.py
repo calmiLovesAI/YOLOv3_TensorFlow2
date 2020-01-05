@@ -98,6 +98,7 @@ class ParseCOCO(object):
         image_files, image_ids, image_heights, image_widths = self.__get_image_information(self.train_dict)
         image_ids_from_annotation, bboxes, category_ids = self.__get_bounding_box_information(self.train_dict)
         with open(file=txt_dir, mode="a+") as f:
+            picture_index = 0
             for i in range(len(image_files)):
                 write_line_start_time = time.time()
                 line_info = ""
@@ -109,9 +110,10 @@ class ParseCOCO(object):
                                                            image_widths[i],
                                                            category_ids)
                 if processed_bboxes:
+                    picture_index += 1
                     line_info += self.__bbox_str(bboxes=processed_bboxes)
                     line_info += "\n"
-                    print("Writing information of picture {} to {}, which took {:.2f}s".format(image_files[i], txt_dir, time.time() - write_line_start_time))
+                    print("Writing information of the {}th picture {} to {}, which took {:.2f}s".format(picture_index, image_files[i], txt_dir, time.time() - write_line_start_time))
                     f.write(line_info)
 
 
