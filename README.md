@@ -21,8 +21,25 @@ A tensorflow2 implementation of YOLO_V3.
             |——SegmentationClass
             |——SegmentationObject
 ```
-3. Change the parameters in **configuration.py** according to the specific situation. Specially, you can set *"load_weights_before_training"* to **True** if you would like to restore training from saved weights.
-4. Run **write_to_txt.py** to generate *data.txt*, and then run **train_from_scratch.py** to start training.
+3. Change the parameters in **configuration.py** according to the specific situation. Specially, you can set *"load_weights_before_training"* to **True** if you would like to restore training from saved weights. You
+can also set *"test_images_during_training"* to **True**, so that the detect results will be show after each epoch.
+4. Run **write_voc_to_txt.py** to generate *data.txt*, and then run **train_from_scratch.py** to start training.
+
+### Train on COCO2017
+1. Download the COCO2017 dataset.
+2. Unzip the **train2017.zip**,  **annotations_trainval2017.zip** and place them in the 'dataset' folder, make sure the directory is like this : 
+```
+|——dataset
+    |——COCO
+        |——2017
+            |——annotations
+            |——train2017
+```
+3. Change the parameters in **configuration.py** according to the specific situation. Specially, you can set *"load_weights_before_training"* to **True** if you would like to restore training from saved weights. You
+can also set *"test_images_during_training"* to **True**, so that the detect results will be show after each epoch.
+4. Run **write_coco_to_txt.py** to generate *data.txt*, and then run **train_from_scratch.py** to start training.
+
+
 
 ### Train on custom dataset
 1. Turn your custom dataset's labels into this form: 
