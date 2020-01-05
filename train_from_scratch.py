@@ -1,7 +1,10 @@
 import tensorflow as tf
+
+from utils.visualize import visualize_training_results
 from yolo.yolo_v3 import YOLOV3
 from configuration import CATEGORY_NUM, IMAGE_HEIGHT, IMAGE_WIDTH, CHANNELS, EPOCHS, BATCH_SIZE, \
-    save_model_dir, save_frequency, load_weights_before_training, load_weights_from_epoch
+    save_model_dir, save_frequency, load_weights_before_training, load_weights_from_epoch, \
+    test_images_during_training, test_images
 from yolo.loss import YoloLoss
 from data_process.make_dataset import generate_dataset, parse_dataset_batch
 from yolo.make_label import GenerateLabel
@@ -77,5 +80,8 @@ if __name__ == '__main__':
 
         if epoch % save_frequency == 0:
             net.save_weights(filepath=save_model_dir+"epoch-{}".format(epoch), save_format='tf')
+
+        if test_images_during_training:
+            visualize_training_results(pictures=test_images, model=net, epoch=epoch)
 
     net.save_weights(filepath=save_model_dir+"saved_model", save_format='tf')

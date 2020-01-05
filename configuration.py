@@ -71,6 +71,10 @@ MAX_TRUE_BOX_NUM_PER_IMG = 20
 save_model_dir = "saved_model/"
 save_frequency = 5
 
+test_images_during_training = True
+training_results_save_dir = "./test_results_during_training/"
+test_images = ["", ""]
+
 test_picture_dir = "./test_data/1.jpg"
 test_video_dir = "./test_data/test_video.mp4"
 temp_frame_dir = "./test_data/temp.jpg"
