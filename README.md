@@ -45,7 +45,7 @@ can also set *"test_images_during_training"* to **True**, so that the detect res
 1. Turn your custom dataset's labels into this form: 
 ```xxx.jpg 100 200 300 400 1 300 600 500 800 2```.
 The first position is the image name, and the next 5 elements are [xmin, ymin, xmax, ymax, class_id]. If there are multiple boxes, continue to add elements later. <br>**Considering that the image will be resized before it is entered into the network, the values of xmin, ymin, xmax, and ymax will also change accordingly.**<br>
-The example of **original picture** and **resized picture**:<br>
+The example of **original picture**(from PASCAL VOC 2012 dataset) and **resized picture**:<br>
 ![original picture](https://raw.githubusercontent.com/calmisential/YOLOv3_TensorFlow2/master/assets/1.png)
 ![resized picture](https://raw.githubusercontent.com/calmisential/YOLOv3_TensorFlow2/master/assets/2.png)<br>
 Create a new file *data.txt* in the data_process directory and write the label of each picture into it, each line is a label for an image.

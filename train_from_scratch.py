@@ -23,10 +23,10 @@ def generate_label_batch(true_boxes):
 
 if __name__ == '__main__':
     # GPU settings
-    gpus = tf.config.experimental.list_physical_devices('GPU')
+    gpus = tf.config.list_physical_devices(device_type="GPU")
     if gpus:
         for gpu in gpus:
-            tf.config.experimental.set_memory_growth(gpu, True)
+            tf.config.experimental.set_memory_growth(device=gpu, enable=True)
 
     # dataset
     train_dataset, train_count = generate_dataset()

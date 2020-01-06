@@ -5,10 +5,10 @@ from yolo.yolo_v3 import YOLOV3
 
 if __name__ == '__main__':
     # GPU settings
-    gpus = tf.config.experimental.list_physical_devices('GPU')
+    gpus = tf.config.list_physical_devices(device_type="GPU")
     if gpus:
         for gpu in gpus:
-            tf.config.experimental.set_memory_growth(gpu, True)
+            tf.config.experimental.set_memory_growth(device=gpu, enable=True)
 
     # load model
     yolo_v3 = YOLOV3(out_channels=3 * (CATEGORY_NUM + 5))
