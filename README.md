@@ -53,8 +53,12 @@ Create a new file *data.txt* in the data_process directory and write the label o
 3. Run **write_to_txt.py** to generate *data.txt*, and then run **train_from_scratch.py** to start training.
 
 ### Test
-1. Change *"test_picture_dir"* in **configuration.py**.
+1. Change *"test_picture_dir"* in **configuration.py** according to the specific situation.
 2. Run **test_on_single_image.py** to test single picture.
+
+### Convert model to TensorFlow Lite format
+1. Change the *"TFLite_model_dir"* in **configuration.py** according to the specific situation.
+2. Run **convert_to_tflite.py** to generate TensorFlow Lite model.
 
 
 ## References
