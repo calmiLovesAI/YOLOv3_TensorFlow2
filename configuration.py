@@ -71,6 +71,9 @@ MAX_TRUE_BOX_NUM_PER_IMG = 20
 save_model_dir = "saved_model/"
 save_frequency = 5
 
+# tensorflow lite model
+TFLite_model_dir = "yolov3_model.tflite"
+
 test_images_during_training = True
 training_results_save_dir = "./test_results_during_training/"
 test_images = ["", ""]
