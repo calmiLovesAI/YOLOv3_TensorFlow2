@@ -3,7 +3,7 @@ A tensorflow2 implementation of YOLO_V3.
 
 ## Requirements:
 + Python == 3.7
-+ TensorFlow == 2.0.0
++ TensorFlow == 2.1.0
 + numpy == 1.17.0
 + opencv-python == 4.1.0
 
