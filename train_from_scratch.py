@@ -48,7 +48,7 @@ if __name__ == '__main__':
         decay_rate=0.96,
         staircase=True
     )
-    optimizer = tf.optimizers.RMSprop(learning_rate=lr_schedule)
+    optimizer = tf.optimizers.Adam(learning_rate=lr_schedule)
 
 
     # metrics
