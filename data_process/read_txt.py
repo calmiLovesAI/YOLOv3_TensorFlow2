@@ -1,7 +1,7 @@
 from configuration import MAX_TRUE_BOX_NUM_PER_IMG
 
 
-class ReadTxt():
+class ReadTxt(object):
     def __init__(self, line_bytes):
         super(ReadTxt, self).__init__()
         # bytes -> string

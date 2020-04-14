@@ -5,25 +5,27 @@ import numpy as np
 class IOUDifferentXY():
     def __init__(self, box_1, box_2):
         super(IOUDifferentXY, self).__init__()
-        self.box_1_min, self.box_1_max = self.__get_box_min_and_max(box_1)
-        self.box_2_min, self.box_2_max = self.__get_box_min_and_max(box_2)
-        self.box_1_area = self.__get_box_area(box_1)
-        self.box_2_area = self.__get_box_area(box_2)
+        self.box_1_min, self.box_1_max = IOUDifferentXY.__get_box_min_and_max(box_1)
+        self.box_2_min, self.box_2_max = IOUDifferentXY.__get_box_min_and_max(box_2)
+        self.box_1_area = IOUDifferentXY.__get_box_area(box_1)
+        self.box_2_area = IOUDifferentXY.__get_box_area(box_2)
 
-    def __get_box_min_and_max(self, box):
+    @staticmethod
+    def __get_box_min_and_max(box):
         box_xy = box[..., 0:2]
         box_wh = box[..., 2:4]
         box_min = box_xy - box_wh / 2
         box_max = box_xy + box_wh / 2
         return box_min, box_max
 
-    def __get_box_area(self, box):
+    @staticmethod
+    def __get_box_area(box):
         return box[..., 2] * box[..., 3]
 
     def calculate_iou(self):
         intersect_min = np.maximum(self.box_1_min, self.box_2_min)
         intersect_max = np.minimum(self.box_1_max, self.box_2_max)
-        intersect_wh = np.maximum(intersect_max - intersect_min, 0.0)
+        intersect_wh = np.maximum(intersect_max - intersect_min + 1.0, 0.0)
         intersect_area = intersect_wh[..., 0] * intersect_wh[..., 1]
         union_area = self.box_1_area + self.box_2_area - intersect_area
         iou = intersect_area / union_area
@@ -46,7 +48,7 @@ class IOUSameXY():
     def calculate_iou(self):
         intersect_min = np.maximum(self.box_min, self.anchor_min)
         intersect_max = np.minimum(self.box_max, self.anchor_max)
-        intersect_wh = np.maximum(intersect_max - intersect_min, 0.0)
+        intersect_wh = np.maximum(intersect_max - intersect_min + 1.0, 0.0)
         intersect_area = intersect_wh[..., 0] * intersect_wh[..., 1]    # w * h
         union_area = self.anchor_area + self.box_area - intersect_area
         iou = intersect_area / union_area  # shape : [N, 9]
