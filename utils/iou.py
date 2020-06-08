@@ -25,7 +25,7 @@ class IOUDifferentXY():
     def calculate_iou(self):
         intersect_min = np.maximum(self.box_1_min, self.box_2_min)
         intersect_max = np.minimum(self.box_1_max, self.box_2_max)
-        intersect_wh = np.maximum(intersect_max - intersect_min + 1.0, 0.0)
+        intersect_wh = np.maximum(intersect_max - intersect_min, 0.0)
         intersect_area = intersect_wh[..., 0] * intersect_wh[..., 1]
         union_area = self.box_1_area + self.box_2_area - intersect_area
         iou = intersect_area / union_area

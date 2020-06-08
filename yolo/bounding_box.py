@@ -19,19 +19,22 @@ def bounding_box_predict(feature_map, scale_type, is_training=False):
         raise ValueError("The shape[1] and shape[2] of feature map must be the same value.")
     area = h * w
     pred = tf.reshape(feature_map, shape=(-1, ANCHOR_NUM_EACH_SCALE * area, CATEGORY_NUM + 5))
-    pred = tf.nn.sigmoid(pred)
+    # pred = tf.nn.sigmoid(pred)
     tx_ty, tw_th, confidence, class_prob = tf.split(pred, num_or_size_splits=[2, 2, 1, CATEGORY_NUM], axis=-1)
+    confidence = tf.nn.sigmoid(confidence)
+    class_prob = tf.nn.sigmoid(class_prob)
     center_index = generate_grid_index(grid_dim=h)
     center_index = tf.tile(center_index, [1, ANCHOR_NUM_EACH_SCALE])
     center_index = tf.reshape(center_index, shape=(1, -1, 2))
     # shape : (1, 507, 2), (1, 2028, 2), (1, 8112, 2)
 
-    center_coord = center_index + tx_ty
-    anchors = tf.tile(get_coco_anchors(scale_type) / IMAGE_HEIGHT, [area, 1])
+    center_coord = center_index + tf.nn.sigmoid(tx_ty)
+    anchors = tf.tile(get_coco_anchors(scale_type) / IMAGE_HEIGHT, [area, 1]) # shape: (507, 2), (2028, 2), (8112, 2)
     bw_bh = tf.math.exp(tw_th) * anchors
 
     box_xy = center_coord / h
     box_wh = bw_bh
+
 
     # reshape
     center_index = tf.reshape(center_index, shape=(-1, h, w, ANCHOR_NUM_EACH_SCALE, 2))

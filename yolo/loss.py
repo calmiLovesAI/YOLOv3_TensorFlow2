@@ -42,10 +42,12 @@ class YoloLoss(tf.keras.losses.Loss):
             pred_xy, pred_wh, grid, pred_features = bounding_box_predict(feature_map=y_pred[i],
                                                                          scale_type=i,
                                                                          is_training=True)
+
             pred_box = tf.concat(values=[pred_xy, pred_wh], axis=-1)
             true_xy_offset = y_true[i][..., 0:2] * grid_shapes[i] - grid
             true_wh_offset = tf.math.log(y_true[i][..., 2:4] * self.__get_scale_size(scale=i) + 1e-10)
             true_wh_offset = tf.keras.backend.switch(true_object_mask_bool, true_wh_offset, tf.zeros_like(true_wh_offset))
+
 
             box_loss_scale = 2 - y_true[i][..., 2:3] * y_true[i][..., 3:4]
 
