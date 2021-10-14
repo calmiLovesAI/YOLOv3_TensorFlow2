@@ -27,13 +27,13 @@ def draw_boxes_on_image(image, boxes, scores, classes):
 
 
 def single_image_inference(image_dir, model):
-    image = tf.io.decode_jpeg(contents=tf.io.read_file(image_dir), channels=CHANNELS)
+    image = tf.io.decode_image(contents=tf.io.read_file(image_dir), channels=CHANNELS)
     h = image.shape[0]
     w = image.shape[1]
     input_image_shape = tf.constant([h, w], dtype=tf.dtypes.float32)
     img_tensor = resize_image_with_pad(image)
     img_tensor = tf.dtypes.cast(img_tensor, dtype=tf.dtypes.float32)
-    img_tensor = img_tensor / 255.0
+    # img_tensor = img_tensor / 255.0
     yolo_output = model(img_tensor, training=False)
     boxes, scores, classes = Inference(yolo_output=yolo_output, input_image_shape=input_image_shape).get_final_boxes()
     image_with_boxes = draw_boxes_on_image(cv2.imread(image_dir), boxes, scores, classes)
